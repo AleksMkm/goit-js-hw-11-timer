@@ -69,3 +69,26 @@ const myTimer = new CountdownTimer({
 
 // запускаем при загрузке страницы
 window.onload = myTimer.start();
+
+// перезапуск таймера по кастомной дате
+
+const refs = {
+  inputEl: document.querySelector('#timer-input'),
+  btnEl: document.querySelector('.timer-btn'),
+};
+
+let inputValue = '';
+
+refs.inputEl.addEventListener('blur', onInputBlur);
+
+function onInputBlur(e) {
+  inputValue = e.target.value;
+}
+
+function updateTargetDateOnClick(e) {
+  myTimer.targetDate = new Date(inputValue);
+  console.log(myTimer.targetDate);
+  window.onload = myTimer.start();
+}
+
+refs.btnEl.addEventListener('click', updateTargetDateOnClick);
