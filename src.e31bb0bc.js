@@ -289,7 +289,26 @@ var myTimer = new CountdownTimer({
   targetDate: new Date('Nov 25, 2020 10:57 AM')
 }); // запускаем при загрузке страницы
 
-window.onload = myTimer.start();
+window.onload = myTimer.start(); // перезапуск таймера по кастомной дате
+
+var refs = {
+  inputEl: document.querySelector('#timer-input'),
+  btnEl: document.querySelector('.timer-btn')
+};
+var inputValue = '';
+refs.inputEl.addEventListener('blur', onInputBlur);
+
+function onInputBlur(e) {
+  inputValue = e.target.value;
+}
+
+function updateTargetDateOnClick(e) {
+  myTimer.targetDate = new Date(inputValue);
+  console.log(myTimer.targetDate);
+  window.onload = myTimer.start();
+}
+
+refs.btnEl.addEventListener('click', updateTargetDateOnClick);
 },{"./main.css":"main.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -318,7 +337,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49852" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56180" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
