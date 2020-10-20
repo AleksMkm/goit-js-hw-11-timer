@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "parcel src/*.html",
     "build": "parcel build src/*.html",
+    "predeploy": "npm run build -- --public-url=/goit-js-hw-11-timer/",
     "deploy": "gh-pages -d dist"
   },
   "repository": {
