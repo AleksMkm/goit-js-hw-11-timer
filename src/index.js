@@ -8,7 +8,7 @@ class CountdownTimer {
     this.intervalId = null;
     this.selector = document.querySelector(`${selector}`);
     this.targetDate = targetDate;
-    this.init();
+    this.setTimer();
   }
 
   // очищает интерфейс до формата 00:00:00
@@ -20,19 +20,25 @@ class CountdownTimer {
   // таймер
   start() {
     this.intervalId = setInterval(() => {
-      const currentTime = Date.now();
-      const deltaTime = this.targetDate - currentTime;
-
-      // предотвращаем появление отрицательного времени
-      if (deltaTime <= 0) {
-        clearInterval(this.intervalId);
-        this.init();
-        return;
-      }
-
-      const time = this.getTimeComponents(deltaTime);
-      this.updateTimerFace(time);
+      this.setTimer();
     }, 1000);
+  }
+
+  // устанавливает значение таймера
+
+  setTimer() {
+    const currentTime = Date.now();
+    const deltaTime = this.targetDate - currentTime;
+
+    // предотвращаем появление отрицательного времени
+    if (deltaTime <= 0) {
+      clearInterval(this.intervalId);
+      this.init();
+      return;
+    }
+
+    const time = this.getTimeComponents(deltaTime);
+    this.updateTimerFace(time);
   }
 
   // обновляет интерфейс
