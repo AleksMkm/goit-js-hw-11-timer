@@ -211,7 +211,7 @@ var CountdownTimer = /*#__PURE__*/function () {
     this.intervalId = null;
     this.selector = document.querySelector("".concat(selector));
     this.targetDate = targetDate;
-    this.init();
+    this.setTimer();
   } // очищает интерфейс до формата 00:00:00
 
 
@@ -228,21 +228,24 @@ var CountdownTimer = /*#__PURE__*/function () {
       var _this = this;
 
       this.intervalId = setInterval(function () {
-        var currentTime = Date.now();
-        var deltaTime = _this.targetDate - currentTime; // предотвращаем появление отрицательного времени
-
-        if (deltaTime <= 0) {
-          clearInterval(_this.intervalId);
-
-          _this.init();
-
-          return;
-        }
-
-        var time = _this.getTimeComponents(deltaTime);
-
-        _this.updateTimerFace(time);
+        _this.setTimer();
       }, 1000);
+    } // устанавливает значение таймера
+
+  }, {
+    key: "setTimer",
+    value: function setTimer() {
+      var currentTime = Date.now();
+      var deltaTime = this.targetDate - currentTime; // предотвращаем появление отрицательного времени
+
+      if (deltaTime <= 0) {
+        clearInterval(this.intervalId);
+        this.init();
+        return;
+      }
+
+      var time = this.getTimeComponents(deltaTime);
+      this.updateTimerFace(time);
     } // обновляет интерфейс
 
   }, {
@@ -337,7 +340,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56180" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56091" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
